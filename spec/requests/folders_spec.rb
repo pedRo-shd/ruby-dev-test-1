@@ -66,7 +66,7 @@ RSpec.describe "/folders", type: :request do
 
       it "redirects to the created folder" do
         post folders_url, params: { folder: valid_attributes }
-        expect(response).to redirect_to(folder_url(Folder.last))
+        expect(response).to redirect_to(folders_url)
       end
     end
 

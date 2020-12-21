@@ -26,7 +26,7 @@ class FoldersController < ApplicationController
   def create
     @folder = Folder.new(folder_params)
     @folder.save
-    respond_with @folder
+    respond_with @folder, location: -> { folders_path(@folders) }
   end
 
   # PATCH/PUT /folders/1
