@@ -1,0 +1,13 @@
+<% if notice %>
+  <div class="notification">
+    <p id="notice"><%= notice %></p>
+  </div>
+<% end %>
+
+<div class="box">
+  <strong>Name:</strong>
+  <%= @folder.name %>
+</div>
+
+<%= link_to 'Edit', edit_folder_path(@folder) %> |
+<%= link_to 'Back', folders_path %>
