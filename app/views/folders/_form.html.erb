@@ -12,11 +12,18 @@
   <% end %>
 
   <div class="field">
-    <%= form.label :name %>
-    <%= form.text_field :name %>
+    <label class="label">Name</label>
+    <div class="control">
+      <%= form.text_field :name, class: 'input' %>
+    </div>
   </div>
 
-  <div class="actions">
-    <%= form.submit %>
+  <div class="field is-grouped">
+    <div class="control">
+      <button class="button is-link" type='sumit'>Save</button>
+    </div>
+    <div class="control">
+      <%= link_to 'Cancel', folders_path, class: 'button is-link is-light' %>
+    </div>
   </div>
 <% end %>
