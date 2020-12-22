@@ -1,0 +1,29 @@
+<%= form_with  url: url, method: method do |form| %>
+  <% if subfolder.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(subfolder.errors.count, "error") %> prohibited this folder from being saved:</h2>
+
+      <ul>
+        <% subfolder.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <label class="label">Name</label>
+    <div class="control">
+      <%= form.text_field :name, class: 'input', value: subfolder.try(:name) %>
+    </div>
+  </div>
+
+  <div class="field is-grouped">
+    <div class="control">
+      <button class="button is-link" type='sumit'>Save</button>
+    </div>
+    <div class="control">
+      <%= link_to 'Cancel', index_subfolders_path(folder), class: 'button is-link is-light' %>
+    </div>
+  </div>
+<% end %>

@@ -34,6 +34,8 @@ gem 'responders', '~> 3.0.1'
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
+  # Factory Bot hearts Rails
+  gem 'factory_bot_rails', '~> 6.1.0'
   # RSpec for Rails 5+
   gem 'rspec-rails', '~> 4.0.1'
 end
