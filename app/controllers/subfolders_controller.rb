@@ -5,7 +5,11 @@ class SubfoldersController < ApplicationController
 
   def index; end
 
-  def show; end
+  def show
+    render :show, locals: {
+        parent_relation_subfolders: parent_relation_subfolders
+      }
+  end
 
   def new
     @subfolder = Folders::Subfolder.new
@@ -48,5 +52,12 @@ class SubfoldersController < ApplicationController
 
   def subfolders
     @subfolders = SubfoldersQueries.new(parent_id: parent.id).by_parent
+  end
+
+  def parent_relation_subfolders
+    return if params[:id].blank?
+
+    @parent_relation_subfolders ||=
+      ParentRelationQueries.new(parent_id: params[:id]).subfolders
   end
 end
