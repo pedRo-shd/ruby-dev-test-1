@@ -115,5 +115,21 @@ RSpec.describe "/folders", type: :request do
       delete folder_url(folder)
       expect(response).to redirect_to(folders_url)
     end
+
+    context "when Folder has Folders::Subfolders" do
+      let(:attributes_subfolder) do
+        { name: 'Subfolder_A', parent_id: folder_a.id }
+      end
+
+      let(:folder_a) { create(:folder, name: 'Contrato_A') }
+
+      it "must remove folder and subfolders" do
+        Folders::Subfolder.create! attributes_subfolder
+        expect(Folder.all.size).to eql(2)
+        expect {
+          delete folder_url(folder_a)
+        }.to change(Folder, :count).by(-2)
+      end
+    end
   end
 end

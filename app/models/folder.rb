@@ -1,5 +1,7 @@
 class Folder < ApplicationRecord
-  has_many :subfolders, -> { order(:name) }, class_name: 'Folders::Subfolder', foreign_key: :parent_id
+  has_many :subfolders, lambda {
+    order(:name)
+  }, class_name: 'Folders::Subfolder', foreign_key: :parent_id, dependent: :destroy
   belongs_to :parent, class_name: 'Folder', optional: true
 
   validates :name, presence: true
