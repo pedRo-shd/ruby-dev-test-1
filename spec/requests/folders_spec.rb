@@ -33,14 +33,6 @@ RSpec.describe "/folders", type: :request do
     end
   end
 
-  describe "GET /show" do
-    it "renders a successful response" do
-      folder = Folder.create! valid_attributes
-      get folder_url(folder)
-      expect(response).to be_successful
-    end
-  end
-
   describe "GET /new" do
     it "renders a successful response" do
       get new_folder_url
@@ -101,11 +93,11 @@ RSpec.describe "/folders", type: :request do
         expect(folder.name).to eql(new_attributes[:name])
       end
 
-      it "redirects to the folder" do
+      it "redirects to the folders index" do
         folder = Folder.create! valid_attributes
         patch folder_url(folder), params: { folder: new_attributes }
         folder.reload
-        expect(response).to redirect_to(folder_url(folder))
+        expect(response).to redirect_to(folders_url)
       end
     end
 

@@ -7,19 +7,13 @@ class FoldersController < ApplicationController
     @folders = Folder.all
   end
 
-  # GET /folders/1
-  # GET /folders/1.json
-  def show
-  end
-
   # GET /folders/new
   def new
     @folder = Folder.new
   end
 
   # GET /folders/1/edit
-  def edit
-  end
+  def edit; end
 
   # POST /folders
   # POST /folders.json
@@ -33,7 +27,7 @@ class FoldersController < ApplicationController
   # PATCH/PUT /folders/1.json
   def update
     @folder.update(folder_params)
-    respond_with @folder
+    respond_with @folder, location: -> { folders_path(@folders) }
   end
 
   # DELETE /folders/1
@@ -44,6 +38,7 @@ class FoldersController < ApplicationController
   end
 
   private
+
   # Use callbacks to share common setup or constraints between actions.
   def set_folder
     @folder = Folder.find(params[:id])
