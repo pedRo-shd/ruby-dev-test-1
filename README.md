@@ -36,5 +36,8 @@ bundle install
 bundle exec rails webpacker:install
 ```
 ```
+yarn install
+```
+```
 bundle exec rails db:create db:migrate
 ```
