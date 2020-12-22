@@ -5,17 +5,17 @@
     <nav class="breadcrumb" aria-label="breadcrumbs">
       <ul>
         <li><%= link_to 'Folders', folders_path %></li>
-        <li class="is-active"><a href="#" aria-current="page"><%= @folder.name %></a></li>
+        <li class="is-active"><a href="#" aria-current="page"><%= @parent.name %></a></li>
       </ul>
     </nav>
 
     <br>
     <div class="columns is-mobile">
       <div class="column has-text-centered">
-        <%= link_to 'New Subfolder', new_subfolders_path(@folder), class: 'button' %>
+        <%= link_to 'New Subfolder', new_subfolders_path(@parent), class: 'button is-fullwidth' %>
       </div>
       <div class="column has-text-centered">
-        <%= link_to 'New File', '#', class: 'button' %>
+        <%= link_to 'New File', '#', class: 'button is-fullwidth' %>
       </div>
     </div>
 
@@ -30,7 +30,7 @@
           <%= link_to 'Edit', edit_subfolder_path(subfolder) %>
         </div>
         <div class="column is-2">
-          <%= link_to 'Destroy', subfolder, method: :delete, data: { confirm: 'Are you sure?' } %>
+          <%= link_to 'Destroy', subfolder_url(subfolder), method: :delete, data: { confirm: 'Are you sure?' } %>
         </div>
 
       </div>

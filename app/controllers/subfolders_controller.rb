@@ -1,53 +1,52 @@
 class SubfoldersController < ApplicationController
   before_action :set_subfolder, only: %i[show edit update destroy]
-  before_action :folder, only: %i[index new create]
+  before_action :parent, only: %i[index new create]
+  before_action :subfolders, only: %i[index]
 
-  respond_to :html
+  def index; end
 
-  def index
-    @subfolders = Subfolder.all
-    respond_with @subfolder, location: -> { index_subfolders_path(@folder.id) }
-  end
-
-  def show
-    respond_with @subfolder
-  end
+  def show; end
 
   def new
-    @subfolder = Subfolder.new
-    respond_with @subfolder, location: -> { new_subfolders_path(@folder, @subfolder) }
+    @subfolder = Folders::Subfolder.new
+    respond_with @subfolder, location: -> { new_subfolders_path(@parent.id, @subfolder) }
   end
 
   def edit; end
 
   def create
-    @subfolder = Subfolder.new(params_subfolder)
+    @subfolder = Folders::Subfolder.new(params_subfolder)
     @subfolder.save
-    respond_with @subfolder, location: -> { index_subfolders_path(@folder.id) }
+    respond_with @subfolder, location: -> { index_subfolders_path(@parent.id) }
   end
 
   def update
-    @folder = @subfolder.folder
+    @parent = @subfolder.parent
     @subfolder.update(name: params[:name])
-    respond_with @subfolder, location: -> { index_subfolders_path(@folder.id) }
+    respond_with @subfolder, location: -> { index_subfolders_path(@parent.id) }
   end
 
   def destroy
+    @parent = @subfolder.parent
     @subfolder.destroy
-    respond_with @subfolder, location: -> { "/#{@subfolder.folder.id}/subfolders" }
+    respond_with @subfolder, location: -> { index_subfolders_path(@parent.id) }
   end
 
   private
 
   def set_subfolder
-    @subfolder = Subfolder.find(params[:id])
+    @subfolder = Folders::Subfolder.find(params[:id])
   end
 
   def params_subfolder
-    { name: params[:name], folder_id: params[:folder_id] }
+    { name: params[:name], parent_id: params[:parent_id] }
   end
 
-  def folder
-    @folder = Folder.find params[:folder_id]
+  def parent
+    @parent = Folder.find params[:parent_id]
+  end
+
+  def subfolders
+    @subfolders = SubfoldersQueries.new(parent_id: parent.id).by_parent
   end
 end

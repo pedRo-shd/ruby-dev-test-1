@@ -11,4 +11,8 @@ class SubfoldersQueries
   def exists?
     subfolder_object.where(params).exists?
   end
+
+  def by_parent
+    subfolder_object.where(params)
+  end
 end

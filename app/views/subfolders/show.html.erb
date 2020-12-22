@@ -5,7 +5,7 @@
     <nav class="breadcrumb" aria-label="breadcrumbs">
       <ul>
         <li><%= link_to 'Folders', folders_path %></li>
-        <li><%= link_to "#{@subfolder.folder.name}", index_subfolders_path(@subfolder.folder.id) %></li>
+        <li><%= link_to "#{@subfolder.parent.name}", index_subfolders_path(@subfolder.parent.id) %></li>
         <li class="is-active"><a href="#" aria-current="page"><%= @subfolder.name %></a></li>
       </ul>
     </nav>
@@ -13,7 +13,7 @@
     <br>
     <div class="columns is-mobile">
       <div class="column has-text-centered">
-        <%= link_to 'New File', '#', class: 'button' %>
+        <%= link_to 'New File', '#', class: 'button is-fullwidth' %>
       </div>
     </div>
 
