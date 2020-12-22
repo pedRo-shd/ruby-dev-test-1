@@ -1,0 +1,22 @@
+<p id="notice"><%= notice %></p>
+
+<article class="panel is-primary">
+  <div class="is-small-padding-left">
+    <nav class="breadcrumb" aria-label="breadcrumbs">
+      <ul>
+        <li><%= link_to 'Folders', folders_path %></li>
+        <li><%= link_to "#{@subfolder.folder.name}", index_subfolders_path(@subfolder.folder.id) %></li>
+        <li class="is-active"><a href="#" aria-current="page"><%= @subfolder.name %></a></li>
+      </ul>
+    </nav>
+
+    <br>
+    <div class="columns is-mobile">
+      <div class="column has-text-centered">
+        <%= link_to 'New File', '#', class: 'button' %>
+      </div>
+    </div>
+
+
+  </div>
+</article>
