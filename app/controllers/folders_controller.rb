@@ -1,11 +1,10 @@
 class FoldersController < ApplicationController
   before_action :set_folder, only: %i[show edit update destroy]
+  before_action :folders, only: %i[index]
 
   # GET /folders
   # GET /folders.json
-  def index
-    @folders = Folder.all
-  end
+  def index; end
 
   # GET /folders/new
   def new
@@ -20,7 +19,7 @@ class FoldersController < ApplicationController
   def create
     @folder = Folder.new(folder_params)
     @folder.save
-    respond_with @folder, location: -> { folders_path(@folders) }
+    respond_with @folder, location: -> { folders_path }
   end
 
   # PATCH/PUT /folders/1
@@ -47,5 +46,9 @@ class FoldersController < ApplicationController
   # Only allow a list of trusted parameters through.
   def folder_params
     params.require(:folder).permit(:name)
+  end
+
+  def folders
+    @folders = FoldersQueries.new.all
   end
 end
