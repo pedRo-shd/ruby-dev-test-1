@@ -1,5 +1,3 @@
-<p id="notice"><%= notice %></p>
-
 <article class="panel is-primary">
   <div class="is-small-padding-left">
     <nav class="breadcrumb" aria-label="breadcrumbs">
@@ -15,7 +13,7 @@
         <%= link_to 'New Subfolder', new_subfolders_path(@parent), class: 'button is-fullwidth' %>
       </div>
       <div class="column has-text-centered">
-        <%= link_to 'New File', '#', class: 'button is-fullwidth' %>
+        <%#= link_to 'New File', new_upload_file_path(id: @parent.id), class: 'button is-fullwidth' %>
       </div>
     </div>
 

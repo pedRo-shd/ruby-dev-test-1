@@ -1,0 +1,9 @@
+<% if alert %>
+  <div class="notification is-danger">
+    <p id="alert"><%= alert %></p>
+  </div>
+<% elsif notice %>
+  <div class="notification is-success">
+    <p id="notice"><%= notice %></p>
+  </div>
+<% end %>

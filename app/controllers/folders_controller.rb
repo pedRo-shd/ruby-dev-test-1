@@ -4,7 +4,9 @@ class FoldersController < ApplicationController
 
   # GET /folders
   # GET /folders.json
-  def index; end
+  def index
+    render :index, locals: { presenter: presenter }
+  end
 
   # GET /folders/new
   def new
@@ -26,7 +28,7 @@ class FoldersController < ApplicationController
   # PATCH/PUT /folders/1.json
   def update
     @folder.update(folder_params)
-    respond_with @folder, location: -> { folders_path(@folders) }
+    respond_with @folder, location: -> { folders_path }
   end
 
   # DELETE /folders/1
@@ -49,6 +51,10 @@ class FoldersController < ApplicationController
   end
 
   def folders
-    @folders = FoldersQueries.new.all
+    @folders = FoldersQuery.new.all
+  end
+
+  def presenter
+    @presenter ||= ::FolderPresenter.new
   end
 end
