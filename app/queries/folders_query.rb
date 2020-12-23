@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class FoldersQueries
+class FoldersQuery
   attr_reader :folde_object, :params
 
   def initialize(params = {}, folde_object = Folder)
@@ -9,6 +9,6 @@ class FoldersQueries
   end
 
   def all
-    folde_object.where('parent_id IS NULL')
+    folde_object.where('parent_id IS NULL').order(:created_at)
   end
 end

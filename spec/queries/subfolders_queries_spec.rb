@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe SubfoldersQueries do
+RSpec.describe SubfoldersQuery do
   let(:folder_one) do
     create(:folder, name: 'Contrato_One')
   end

@@ -1,7 +1,7 @@
 require 'rails_helper'
 
-RSpec.describe FoldersQueries do
-  let(:folders_queries_all) do
+RSpec.describe FoldersQuery do
+  let(:folders_Query_all) do
     described_class.new.all
   end
 
@@ -12,10 +12,10 @@ RSpec.describe FoldersQueries do
    end
 
   it "returns only folders" do
-    expect(folders_queries_all.size).to eql(2)
-    expect(folders_queries_all.first.name).to eql(@folder_one.name)
-    expect(folders_queries_all.first.parent_id).to eql(nil)
-    expect(folders_queries_all.last.name).to eql(@folder_two.name)
-    expect(folders_queries_all.last.parent_id).to eql(nil)
+    expect(folders_Query_all.size).to eql(2)
+    expect(folders_Query_all.first.name).to eql(@folder_one.name)
+    expect(folders_Query_all.first.parent_id).to eql(nil)
+    expect(folders_Query_all.last.name).to eql(@folder_two.name)
+    expect(folders_Query_all.last.parent_id).to eql(nil)
   end
 end

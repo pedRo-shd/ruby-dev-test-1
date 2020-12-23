@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class SubfoldersQueries
+class SubfoldersQuery
   attr_reader :subfolder_object, :params
 
   def initialize(params = {}, subfolder_object = Folders::Subfolder)

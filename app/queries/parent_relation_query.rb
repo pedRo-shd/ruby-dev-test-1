@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class ParentRelationQueries
+class ParentRelationQuery
   attr_reader :parent_relation, :params
 
   def initialize(params = {}, parent_relation = Folders::Subfolder.includes(:subfolders))
