@@ -9,7 +9,7 @@ Realizar um fork deste repositório.
 
 ---
 
-## File System Project (Create Folders, Subfolders and send Files)
+## File System Project (Create, See, Edit and Destroy Folders/Subfolders. Create, See and Destroy Files)
 
 Dependencies:
 * Ruby 2.7.2
