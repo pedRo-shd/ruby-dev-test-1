@@ -2,7 +2,7 @@
 
 RSpec.describe "/subfolders", type: :request do
   let(:folder) do
-    create(:folder, name: 'Contrato_A')
+    create(:folder, name: 'Contrato_A', parents_path: [folders_path])
   end
 
   let(:folder_two) do
@@ -59,6 +59,19 @@ RSpec.describe "/subfolders", type: :request do
       it "redirects to the subfolders index" do
         post "/#{folder.id}/subfolders", params: valid_attributes
         expect(response).to redirect_to(index_subfolders_path(folder.id))
+      end
+
+      it "creates a new Subfolder with parents path" do
+        post "/#{folder.id}/subfolders", params: valid_attributes
+        subfolder_last = Folders::Subfolder.last
+        expect(
+          subfolder_last.parents_path
+        ).to eql(
+          {
+            'Contrato_A' => '/1/subfolders/index',
+            'Subfolder_A' => '/2/subfolders/index'
+          }
+        )
       end
     end
 

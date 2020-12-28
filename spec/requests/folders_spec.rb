@@ -39,6 +39,18 @@ RSpec.describe "/folders", type: :request do
         }.to change(Folder, :count).by(1)
       end
 
+      it "creates a new Folder with parents path" do
+        post folders_url, params: { folder: valid_attributes }
+        folder_last = Folder.last
+        expect(
+          folder_last.parents_path
+        ).to eql(
+          {
+            'Contrato_Y' => '/1/subfolders/index',
+          }
+        )
+      end
+
       it "redirects to the created folder" do
         post folders_url, params: { folder: valid_attributes }
         expect(response).to redirect_to(folders_url)
