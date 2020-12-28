@@ -20,12 +20,12 @@ Dependencies:
 
 * Clone the repository:
 ```
-git clone git@github.com:clicksign/ruby-dev-test-1.git
+git clone git@github.com:pedRo-shd/ruby-dev-test-1.git
 ```
 
 * Go to the project
 ```
-cd ruby-dev-test-1/file_system/
+cd ruby-dev-test-1
 ```
 
 * Run the commands below, after installing Dependencies:
@@ -40,4 +40,10 @@ yarn install
 ```
 ```
 bundle exec rails db:create db:migrate
+```
+```
+bundle exec rspec
+```
+```
+bundle exec rails s
 ```
