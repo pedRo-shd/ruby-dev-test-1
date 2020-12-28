@@ -1,14 +1,22 @@
 # frozen_string_literal: true
 
 class FoldersQuery
-  attr_reader :folde_object, :params
+  attr_reader :folder_object, :params
 
-  def initialize(params = {}, folde_object = Folder)
-    @folde_object = folde_object
+  def initialize(params = {}, folder_object = Folder)
+    @folder_object = folder_object
     @params = params
   end
 
   def all
-    folde_object.where('parent_id IS NULL').order(:created_at)
+    folder_object.where('parent_id IS NULL').order(type: :asc)
+  end
+
+  def exists?
+    folder_object.where(params).exists?
+  end
+
+  def by_parent
+    folder_object.where(params).order(type: :desc)
   end
 end
