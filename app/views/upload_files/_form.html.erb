@@ -1,0 +1,29 @@
+<%= form_with url: upload_files_path(id: folder.try(:id)) do |form| %>
+  <% if asset.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(asset.errors.count, "error") %> prohibited this folder from being saved:</h2>
+
+      <ul>
+        <% asset.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <label class="label">File</label>
+    <div class="control">
+      <%= form.file_field :file, class: 'input' %>
+    </div>
+  </div>
+
+  <div class="field is-grouped">
+    <div class="control">
+      <button class="button is-fullwidth is-primary" type='sumit'>Save</button>
+    </div>
+    <div class="control">
+      <%= link_to 'Cancel', url_for(:back), class: 'button is-fullwidth is-primary is-light' %>
+    </div>
+  </div>
+<% end %>
