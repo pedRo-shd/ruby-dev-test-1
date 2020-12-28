@@ -1,5 +1,3 @@
 <h1 class='title'>New Subfolder</h1>
 
-<%= render 'form', subfolder: @subfolder, folder: @folder, url: "/#{@folder.id}/subfolders" , method: :post %>
-
-<%#= link_to 'Back', "/#{@subfolder.folder.id}/subfolders" %>
+<%= render 'form', subfolder: @subfolder, parent: @parent, url: "/#{@parent.id}/subfolders" , method: :post %>

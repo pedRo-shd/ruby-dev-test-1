@@ -1,22 +1,26 @@
-<p id="notice"><%= notice %></p>
-
 <article class="panel is-primary">
   <div class="is-small-padding-left">
     <nav class="breadcrumb" aria-label="breadcrumbs">
       <ul>
-        <li><%= link_to 'Folders', folders_path %></li>
-        <li><%= link_to "#{@subfolder.folder.name}", index_subfolders_path(@subfolder.folder.id) %></li>
-        <li class="is-active"><a href="#" aria-current="page"><%= @subfolder.name %></a></li>
+        <%= @presenter.render_partial_breadcrumb_root(self) %>
+        <% @subfolder.parents_path.each do |parents_path| %>
+          <%= @presenter.render_partial_breadcrumb_subfolder(self, parents_path) %>
+        <% end %>
       </ul>
     </nav>
 
     <br>
     <div class="columns is-mobile">
       <div class="column has-text-centered">
-        <%= link_to 'New File', '#', class: 'button' %>
+        <%= link_to 'New Subfolder', new_subfolders_path(@subfolder), class: 'button is-fullwidth' %>
+      </div>
+      <div class="column has-text-centered">
+        <%= link_to 'New File', new_upload_file_path(id: @subfolder.id), class: 'button is-fullwidth' %>
       </div>
     </div>
 
-
+    <% parent_relation_subfolders.each do |folder| %>
+      <%= presenter.render_partial(self, folder) %>
+    <% end %>
   </div>
 </article>
