@@ -2,9 +2,10 @@
   <div class="is-small-padding-left">
     <nav class="breadcrumb" aria-label="breadcrumbs">
       <ul>
-        <li><%= link_to 'Folders', folders_path %></li>
-        <li><%= link_to "#{@subfolder.parent.name}", index_subfolders_path(@subfolder.parent.id) %></li>
-        <li class="is-active"><a href="#" aria-current="page"><%= @subfolder.name %></a></li>
+        <%= @presenter.render_partial_breadcrumb_root(self) %>
+        <% @subfolder.parents_path.each do |parents_path| %>
+          <%= @presenter.render_partial_breadcrumb_subfolder(self, parents_path) %>
+        <% end %>
       </ul>
     </nav>
 
@@ -14,25 +15,12 @@
         <%= link_to 'New Subfolder', new_subfolders_path(@subfolder), class: 'button is-fullwidth' %>
       </div>
       <div class="column has-text-centered">
-        <%= link_to 'New File', '#', class: 'button is-fullwidth' %>
+        <%= link_to 'New File', new_upload_file_path(id: @subfolder.id), class: 'button is-fullwidth' %>
       </div>
     </div>
 
-    <% parent_relation_subfolders.each do |pr_subfolder| %>
-      <div class="columns is-mobile">
-        <div class="column is-6 is-small-padding-left">
-        <%= link_to subfolder_path(pr_subfolder) do %>
-          <%= pr_subfolder.name %>
-        <% end %>
-        </div>
-        <div class="column is-2">
-          <%= link_to 'Edit', edit_subfolder_path(pr_subfolder) %>
-        </div>
-        <div class="column is-2">
-          <%= link_to 'Destroy', subfolder_url(pr_subfolder), method: :delete, data: { confirm: 'Are you sure?' } %>
-        </div>
-
-      </div>
+    <% parent_relation_subfolders.each do |folder| %>
+      <%= presenter.render_partial(self, folder) %>
     <% end %>
   </div>
 </article>

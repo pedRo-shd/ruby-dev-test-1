@@ -2,13 +2,15 @@ class SubfoldersController < ApplicationController
   before_action :set_subfolder, only: %i[show edit update destroy]
   before_action :parent, only: %i[index new create]
   before_action :subfolders, only: %i[index]
+  before_action :presenter, only: %i[index]
 
   def index; end
 
   def show
     render :show, locals:
     {
-      parent_relation_subfolders: parent_relation_subfolders
+      parent_relation_subfolders: parent_relation_subfolders,
+      presenter: presenter
     }
   end
 
@@ -52,13 +54,17 @@ class SubfoldersController < ApplicationController
   end
 
   def subfolders
-    @subfolders = SubfoldersQuery.new(parent_id: parent.id).by_parent
+    @subfolders = FoldersQuery.new(parent_id: parent.id).by_parent
   end
 
   def parent_relation_subfolders
-    return if params[:id].blank?
+    return [] if params[:id].blank?
 
     @parent_relation_subfolders ||=
       ParentRelationQuery.new(parent_id: params[:id]).subfolders
+  end
+
+  def presenter
+    @presenter ||= ::SubfolderPresenter.new
   end
 end
